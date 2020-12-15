@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="./css/newblog.css" /> -->
+    <link rel="stylesheet" href="/css/newblog.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.tiny.cloud/1/9ni0plol23dhxb9bq3hhcemky1erbodj7hua531igex4ph6c/tinymce/5/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/string-strip-html/dist/string-strip-html.umd.js"></script>
+    <title>Edit Blog post</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mb-4">Editing <%= blog.title %></h1>
+
+      <form action="/blog/<%= blog.id %>?_method=PUT" method="POST">
+        <div class="form-group">
+          <label for="title" class="text-white">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Title"
+            name="title"
+            value="<%= blog.title %> "
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="author" class="text-white">Author</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Author"
+            name="author"
+            value="<%= blog.author %> "
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description" class="text-white">Description</label>
+          <textarea
+            class="form-control"
+            name="description"
+            placeholder="Description"
+          >
+            <%= blog.description %> 
+        </textarea
+          >
+        </div>
+
+        <div class="form-group">
+          <a href="/" class="btn btn-warning">Cancel</a>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      tinymce.init({
+        selector: "textarea",
+        plugins:
+          "a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker",
+        toolbar:
+          "a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table",
+        toolbar_mode: "floating",
+        tinycomments_mode: "embedded",
+        tinycomments_author: "Author name",
+      });
+    </script>
+  </body>
+</html>
